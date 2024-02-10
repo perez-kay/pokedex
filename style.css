@@ -1,6 +1,6 @@
 @font-face {
   font-family: pokemonFont;
-  src: url("pixelgamer.ttf") format("truetype");
+  src: url("fonts/pixelgamer.ttf") format("truetype");
 }
 
 :root {
