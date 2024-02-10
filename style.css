@@ -1,6 +1,6 @@
 @font-face {
   font-family: pokemonFont;
-  src: url("fonts/pixelgamer.ttf") format("truetype");
+  src: url('fonts/pixelgamer.ttf') format('truetype');
 }
 
 :root {
@@ -125,13 +125,16 @@ header {
   border: 0.4rem solid var(--grey);
   border-radius: 1rem;
   margin: 0 1rem;
-  padding: 1rem 8rem;
+  padding: 0rem 4rem;
   background-color: var(--red);
   font-size: 3rem;
+  max-height: 90%;
 }
 
 .description p {
   background-color: white;
+  padding: 2rem;
+  border: 0.4rem solid var(--pink);
 }
 
 .name-plate,
