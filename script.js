@@ -23,16 +23,37 @@ function showPokemon(response) {
     ];
   const dexNum = response['id'];
   const name = response['name'];
+  const height = response['height'];
+  const weight = response['weight'];
 
   spriteDiv.innerHTML = `<img src=${spriteImg} alt="${name} sprite">`;
-  if (Number(dexNum) < 10) {
-    dexNumSpan.innerText = '00' + dexNum;
-  } else if (Number(dexNum) < 100) {
-    dexNumSpan.innerText = '0' + dexNum;
-  } else {
-    dexNumSpan.innerText = dexNum;
-  }
+  dexNumSpan.innerText = formatDexNum(dexNum);
   nameSpan.innerText = name.toUpperCase();
+  heightSpan.innerText = formatHeight(height);
+  weightSpan.innerText = formatWeight(weight);
+}
+
+function formatDexNum(dexNum) {
+  if (Number(dexNum) < 10) {
+    return '00' + dexNum;
+  } else if (Number(dexNum) < 100) {
+    return '0' + dexNum;
+  } else {
+    return dexNum;
+  }
+}
+
+function formatHeight(height) {
+  let totalInches = height * 3.937;
+  let feet = Math.floor(totalInches / 12);
+  let inches = Math.floor(totalInches % 12);
+  return `${feet}' ${inches}"`;
+}
+
+function formatWeight(weight) {
+  let pounds = weight / 4.536;
+  let rounded = Math.round(pounds * 10) / 10;
+  return `${rounded} lbs.`;
 }
 
 // function fetchFlavorText() {
