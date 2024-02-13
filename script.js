@@ -1,23 +1,24 @@
 const spriteDiv = document.querySelector('.top .sprite');
 const dexNumSpan = document.querySelector('.top .info #dex-num');
 const nameSpan = document.querySelector('.top .info .name');
-const genusDiv = document.querySelector('.top .types');
+const genusDiv = document.querySelector('.top .genus');
 const heightSpan = document.querySelector('.top .body-info #height');
 const weightSpan = document.querySelector('.top .body-info #weight');
 const typeDiv = document.querySelector('.top .types');
+const flavorTextDiv = document.querySelector('.top .description p');
 const button = document.querySelector('.bottom button');
 
 button.addEventListener('click', fetchPokemon);
 
 function fetchPokemon() {
-  let pokemon = Math.ceil(Math.random() * 151);
+  let pokemon = Math.ceil(Math.random() * 493);
   let link = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
   fetch(link)
     .then((response) => response.json())
-    .then(showPokemon);
+    .then(showInfo);
 }
 
-function showPokemon(response) {
+function showInfo(response) {
   const spriteImg =
     response['sprites']['versions']['generation-iv']['heartgold-soulsilver'][
       'front_default'
@@ -33,6 +34,7 @@ function showPokemon(response) {
   nameSpan.innerText = name.toUpperCase();
   heightSpan.innerText = formatHeight(height);
   weightSpan.innerText = formatWeight(weight);
+  fetchFlavorText(dexNum);
 }
 
 function setTypes(types) {
@@ -67,11 +69,28 @@ function formatWeight(weight) {
   return `${rounded} lbs.`;
 }
 
-// function fetchFlavorText() {
-//   let link = 'https://pokeapi.co/api/v2/pokemon-species/furret';
-//   fetch(link)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       let text = data['flavor_text_entries'][0]['flavor_text'];
-//     });
-// }
+function fetchFlavorText(dexNum) {
+  let link = `https://pokeapi.co/api/v2/pokemon-species/${dexNum}`;
+  fetch(link)
+    .then((response) => response.json())
+    .then(showFlavorText);
+}
+
+function showFlavorText(response) {
+  let text = '';
+  for (const entry of response['flavor_text_entries']) {
+    if (entry['version']['name'] === 'heartgold') {
+      text = entry['flavor_text'].replace(/(\f|\n)/gm, ' ');
+      break;
+    }
+  }
+  let genus = '';
+  for (const entry of response['genera']) {
+    if (entry['language']['name'] === 'en') {
+      genus = entry['genus'];
+      break;
+    }
+  }
+  flavorTextDiv.innerText = text;
+  genusDiv.innerText = genus;
+}

@@ -135,6 +135,7 @@ header {
   background-color: white;
   padding: 2rem;
   border: 0.4rem solid var(--pink);
+  height: 100%;
 }
 
 .name-plate,
