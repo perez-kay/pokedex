@@ -4,6 +4,7 @@ const nameSpan = document.querySelector('.top .info .name');
 const genusDiv = document.querySelector('.top .types');
 const heightSpan = document.querySelector('.top .body-info #height');
 const weightSpan = document.querySelector('.top .body-info #weight');
+const typeDiv = document.querySelector('.top .types');
 const button = document.querySelector('.bottom button');
 
 button.addEventListener('click', fetchPokemon);
@@ -25,12 +26,22 @@ function showPokemon(response) {
   const name = response['name'];
   const height = response['height'];
   const weight = response['weight'];
-
+  const types = response['types'];
+  setTypes(types);
   spriteDiv.innerHTML = `<img src=${spriteImg} alt="${name} sprite">`;
   dexNumSpan.innerText = formatDexNum(dexNum);
   nameSpan.innerText = name.toUpperCase();
   heightSpan.innerText = formatHeight(height);
   weightSpan.innerText = formatWeight(weight);
+}
+
+function setTypes(types) {
+  let type1 = types[0]['type']['name'];
+  typeDiv.innerHTML = `<img src="images/${type1}.png" alt="${type1} icon">`;
+  if (types.length === 2) {
+    let type2 = types[1]['type']['name'];
+    typeDiv.innerHTML += `<img src="images/${type2}.png" alt="${type2} icon">`;
+  }
 }
 
 function formatDexNum(dexNum) {
