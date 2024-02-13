@@ -187,3 +187,24 @@ header {
 .types #type2 {
   display: none;
 }
+
+.bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 100%;
+}
+
+.bottom button {
+  padding: 2rem;
+  border-radius: 5rem;
+  border: 0.5rem solid var(--grey);
+  background-color: white;
+  font-family: pokemonFont;
+  font-size: 3rem;
+}
+
+.bottom button:hover {
+  cursor: pointer;
+}
