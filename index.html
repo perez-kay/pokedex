@@ -14,16 +14,18 @@
     />
   </head>
   <body>
-    <div class="container grid-bg px-0 vh-100">
+    <div class="container grid-bg">
       <header class="fs-2 text-white">
         <h1 class="ms-3 mb-0">INFO</h1>
       </header>
       <div class="top container">
         <div class="row">
-          <div class="col-6"><div class="sprite"></div></div>
-          <div class="col-6 mt-2">
+          <div class="col-sm-6"><div class="sprite"></div></div>
+          <div class="col-sm-6 mt-sm-2">
             <div class="row">
-              <div class="name-plate p-0 rounded">
+              <div
+                class="name-plate p-0 mb-2 rounded-2 border border-black border-3"
+              >
                 <div
                   class="info px-2 fs-4 text-white d-flex align-items-center"
                 >
@@ -36,9 +38,19 @@
                   <span id="dex-num" class="me-2"></span>
                   <span class="name"></span>
                 </div>
-                <div class="genus fs-4 text-end pe-2 text-white bg-white"></div>
+                <div
+                  class="genus fs-4 rounded-bottom-1 text-end pe-2 text-white bg-white"
+                ></div>
               </div>
-              <div class="row"><div class="types"></div></div>
+              <div class="row justify-content-center">
+                <div class="col-6">
+                  <div class="type1"></div>
+                </div>
+                <div class="col-6">
+                  <div class="type2"></div>
+                </div>
+                <div class="types"></div>
+              </div>
               <div class="row">
                 <div class="body-info">
                   <div class="height">
@@ -51,11 +63,11 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col">
-              <div class="description">
-                <p></p>
-              </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="description">
+              <p></p>
             </div>
           </div>
         </div>

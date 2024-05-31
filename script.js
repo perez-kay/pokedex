@@ -4,7 +4,8 @@ const nameSpan = document.querySelector('.top .info .name');
 const genusDiv = document.querySelector('.top .genus');
 const heightSpan = document.querySelector('.top .body-info #height');
 const weightSpan = document.querySelector('.top .body-info #weight');
-const typeDiv = document.querySelector('.top .types');
+const type1Div = document.querySelector('.type1');
+const type2Div = document.querySelector('.type2');
 const flavorTextDiv = document.querySelector('.top .description p');
 const button = document.querySelector('.bottom button');
 
@@ -29,7 +30,7 @@ function showInfo(response) {
   const weight = response['weight'];
   const types = response['types'];
   setTypes(types);
-  spriteDiv.innerHTML = `<img src=${spriteImg} alt="${name} sprite">`;
+  spriteDiv.innerHTML = `<img src=${spriteImg} class="w-100" alt="${name} sprite">`;
   dexNumSpan.innerText = formatDexNum(dexNum);
   nameSpan.innerText = name.toUpperCase();
   heightSpan.innerText = formatHeight(height);
@@ -39,10 +40,10 @@ function showInfo(response) {
 
 function setTypes(types) {
   let type1 = types[0]['type']['name'];
-  typeDiv.innerHTML = `<img src="images/${type1}.png" alt="${type1} icon">`;
+  type1Div.innerHTML = `<img src="images/${type1}.png" class="w-100" alt="${type1} icon">`;
   if (types.length === 2) {
     let type2 = types[1]['type']['name'];
-    typeDiv.innerHTML += `<img src="images/${type2}.png" alt="${type2} icon">`;
+    type2Div.innerHTML = `<img src="images/${type2}.png" class="w-100" alt="${type2} icon">`;
   }
 }
 
