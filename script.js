@@ -8,6 +8,7 @@ const type1Img = document.querySelector('.type1');
 const type2Img = document.querySelector('.type2');
 const flavorTextDiv = document.querySelector('.top .description p');
 const button = document.querySelector('.bottom button');
+const content = document.querySelector('#content');
 
 button.addEventListener('click', fetchPokemon);
 
@@ -19,6 +20,8 @@ function fetchPokemon() {
   fetch(link)
     .then((response) => response.json())
     .then(showInfo);
+  content.classList.remove('d-none');
+  content.classList.add('fade-in');
 }
 
 function showInfo(response) {
