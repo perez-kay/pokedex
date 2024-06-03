@@ -20,13 +20,6 @@ html {
 body {
   font-family: pokemonFont, monospace !important;
   color: var(--grey);
-}
-
-img {
-  image-rendering: pixelated;
-}
-
-.grid-bg {
   background-size: 70px 70px;
   background-image: linear-gradient(
       to right,
@@ -34,6 +27,14 @@ img {
       transparent 1px
     ),
     linear-gradient(to bottom, rgb(213, 213, 213) 1px, transparent 1px);
+}
+
+img {
+  image-rendering: pixelated;
+}
+
+.dotted-border {
+  border-top: 3px dotted grey;
 }
 
 header {

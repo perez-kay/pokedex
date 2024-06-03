@@ -14,14 +14,14 @@
     />
   </head>
   <body>
-    <div class="container grid-bg">
+    <div class="">
       <header class="fs-2 text-white">
         <h1 class="ms-3 mb-0">INFO</h1>
       </header>
       <div class="top container">
         <div class="row">
-          <div class="col-sm-6"><div class="sprite"></div></div>
-          <div class="col-sm-6 mt-sm-2">
+          <div class="col-md-6"><div class="sprite"></div></div>
+          <div class="col-md-6 mt-sm-2">
             <div class="row">
               <div
                 class="name-plate p-0 mb-2 rounded-2 border border-black border-3"
@@ -42,22 +42,29 @@
                   class="genus fs-4 rounded-bottom-1 text-end pe-2 text-white bg-white"
                 ></div>
               </div>
-              <div class="row justify-content-center">
-                <div class="col-6">
-                  <div class="type1"></div>
-                </div>
-                <div class="col-6">
-                  <div class="type2"></div>
-                </div>
-                <div class="types"></div>
-              </div>
-              <div class="row">
-                <div class="body-info">
-                  <div class="height">
-                    <span>HT </span><span id="height"></span>
+
+              <div class="row my-2">
+                <div class="col-7">
+                  <div
+                    class="d-flex h-100 justify-content-around align-items-center"
+                  >
+                    <img class="type1 w-50 pe-1" />
+
+                    <img class="type2 w-50" />
                   </div>
-                  <div class="weight">
-                    <span>WT </span><span id="weight"></span>
+                </div>
+
+                <div
+                  class="body-info py-1 col-5 bg-white border border-3 rounded border-black"
+                >
+                  <div class="height d-flex justify-content-between">
+                    <p class="mb-0">HT</p>
+                    <p id="height" class="m-0"></p>
+                  </div>
+                  <div class="dotted-border my-1"></div>
+                  <div class="weight d-flex justify-content-between">
+                    <p class="mb-0">WT</p>
+                    <p id="weight" class="m-0"></p>
                   </div>
                 </div>
               </div>
