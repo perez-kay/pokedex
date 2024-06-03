@@ -4,14 +4,16 @@ const nameSpan = document.querySelector('.top .info .name');
 const genusDiv = document.querySelector('.top .genus');
 const heightSpan = document.querySelector('.top .body-info #height');
 const weightSpan = document.querySelector('.top .body-info #weight');
-const type1Div = document.querySelector('.type1');
-const type2Div = document.querySelector('.type2');
+const type1Img = document.querySelector('.type1');
+const type2Img = document.querySelector('.type2');
 const flavorTextDiv = document.querySelector('.top .description p');
 const button = document.querySelector('.bottom button');
 
 button.addEventListener('click', fetchPokemon);
 
 function fetchPokemon() {
+  type1Img.src = '';
+  type2Img.src = '';
   let pokemon = Math.ceil(Math.random() * 493);
   let link = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
   fetch(link)
@@ -40,10 +42,10 @@ function showInfo(response) {
 
 function setTypes(types) {
   let type1 = types[0]['type']['name'];
-  type1Div.innerHTML = `<img src="images/${type1}.png" class="w-100" alt="${type1} icon">`;
+  type1Img.src = `images/${type1}.png`;
   if (types.length === 2) {
     let type2 = types[1]['type']['name'];
-    type2Div.innerHTML = `<img src="images/${type2}.png" class="w-100" alt="${type2} icon">`;
+    type2Img.src = `images/${type2}.png`;
   }
 }
 
