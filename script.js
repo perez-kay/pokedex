@@ -12,28 +12,65 @@ const content = document.querySelector('#content');
 
 button.addEventListener('click', fetchPokemon);
 
+let cache = {};
+
+async function getData(url) {
+  if (cache[url] !== undefined) return cache[url].value;
+
+  await fetch(url)
+    .then((response) => response.json())
+    .then(
+      (data) =>
+        (cache[url] = {
+          sprite:
+            data['sprites']['versions']['generation-iv'][
+              'heartgold-soulsilver'
+            ]['front_default'],
+          dexNum: data['id'],
+          name: data['name'],
+          height: data['height'],
+          weight: data['weight'],
+          types: data['types'],
+        })
+    );
+
+  return cache[url].value;
+}
+
 function fetchPokemon() {
   type1Img.src = '';
   type2Img.src = '';
-  let pokemon = Math.ceil(Math.random() * 493);
+  let pokemon = Math.ceil(Math.random() * 5); // 493
+  console.log(`checking pokemon ${pokemon}`);
   let link = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
-  fetch(link)
-    .then((response) => response.json())
-    .then(showInfo);
+  getData(link).then(showInfo(cache[link]));
   content.classList.remove('d-none');
   content.classList.add('fade-in');
 }
 
-function showInfo(response) {
-  const spriteImg =
-    response['sprites']['versions']['generation-iv']['heartgold-soulsilver'][
-      'front_default'
-    ];
-  const dexNum = response['id'];
-  const name = response['name'];
-  const height = response['height'];
-  const weight = response['weight'];
-  const types = response['types'];
+function cacheData(response, pokemon) {
+  cache[pokemon] = {
+    sprite:
+      response['sprites']['versions']['generation-iv']['heartgold-soulsilver'][
+        'front_default'
+      ],
+    dexNum: response['id'],
+    name: response['name'],
+    height: response['height'],
+    weight: response['weight'],
+    types: response['types'],
+  };
+  console.log(cache[pokemon]);
+  console.log(`cached pokemon ${pokemon}`);
+}
+
+function showInfo(pokemon) {
+  const spriteImg = pokemon['sprite'];
+  const dexNum = pokemon['dexNum'];
+  const name = pokemon['name'];
+  const height = pokemon['height'];
+  const weight = pokemon['weight'];
+  const types = pokemon['types'];
   setTypes(types);
   spriteDiv.innerHTML = `<img src=${spriteImg} class="w-100" alt="${name} sprite">`;
   dexNumSpan.innerText = formatDexNum(dexNum);
