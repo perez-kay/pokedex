@@ -9,10 +9,6 @@
   --pink: #ff98a4;
 }
 
-/* * {
-  overflow: hidden;
-} */
-
 html {
   font-size: 130%;
 }
@@ -33,10 +29,6 @@ img {
   image-rendering: pixelated;
 }
 
-.dotted-border {
-  border-top: 3px dotted rgb(182, 182, 182);
-}
-
 header {
   background: linear-gradient(
     90deg,
@@ -55,6 +47,10 @@ header h1 {
 
 .bottom {
   height: 50vh;
+}
+
+.dotted-border {
+  border-top: 3px dotted rgb(182, 182, 182);
 }
 
 .name-plate {
