@@ -11,17 +11,20 @@ const button = document.querySelector('.bottom button');
 const content = document.querySelector('#content');
 
 button.addEventListener('click', fetchPokemon);
-
 let cache = {};
 
-async function getData(url) {
-  if (cache[url] !== undefined) return cache[url].value;
+function fetchPokemon() {
+  type1Img.src = '';
+  type2Img.src = '';
+  let pokemon = Math.ceil(Math.random() * 493); // 493
+  console.log(`checking pokemon ${pokemon}`);
 
-  await fetch(url)
-    .then((response) => response.json())
-    .then(
-      (data) =>
-        (cache[url] = {
+  if (!cache.hasOwnProperty(pokemon)) {
+    let link = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
+    fetch(link)
+      .then((response) => response.json())
+      .then((data) => {
+        cache[pokemon] = {
           sprite:
             data['sprites']['versions']['generation-iv'][
               'heartgold-soulsilver'
@@ -31,46 +34,23 @@ async function getData(url) {
           height: data['height'],
           weight: data['weight'],
           types: data['types'],
-        })
-    );
-
-  return cache[url].value;
-}
-
-function fetchPokemon() {
-  type1Img.src = '';
-  type2Img.src = '';
-  let pokemon = Math.ceil(Math.random() * 5); // 493
-  console.log(`checking pokemon ${pokemon}`);
-  let link = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
-  getData(link).then(showInfo(cache[link]));
-  content.classList.remove('d-none');
-  content.classList.add('fade-in');
-}
-
-function cacheData(response, pokemon) {
-  cache[pokemon] = {
-    sprite:
-      response['sprites']['versions']['generation-iv']['heartgold-soulsilver'][
-        'front_default'
-      ],
-    dexNum: response['id'],
-    name: response['name'],
-    height: response['height'],
-    weight: response['weight'],
-    types: response['types'],
-  };
-  console.log(cache[pokemon]);
-  console.log(`cached pokemon ${pokemon}`);
+        };
+        console.log(`cached pokemon ${pokemon}`);
+        showInfo(pokemon);
+      });
+  } else {
+    console.log(`reading pokemon ${pokemon} from cache`);
+    showInfo(pokemon);
+  }
 }
 
 function showInfo(pokemon) {
-  const spriteImg = pokemon['sprite'];
-  const dexNum = pokemon['dexNum'];
-  const name = pokemon['name'];
-  const height = pokemon['height'];
-  const weight = pokemon['weight'];
-  const types = pokemon['types'];
+  const spriteImg = cache[pokemon]['sprite'];
+  const dexNum = cache[pokemon]['dexNum'];
+  const name = cache[pokemon]['name'];
+  const height = cache[pokemon]['height'];
+  const weight = cache[pokemon]['weight'];
+  const types = cache[pokemon]['types'];
   setTypes(types);
   spriteDiv.innerHTML = `<img src=${spriteImg} class="w-100" alt="${name} sprite">`;
   dexNumSpan.innerText = formatDexNum(dexNum);
@@ -78,6 +58,8 @@ function showInfo(pokemon) {
   heightSpan.innerText = formatHeight(height);
   weightSpan.innerText = formatWeight(weight);
   fetchFlavorText(dexNum);
+  content.classList.remove('d-none');
+  content.classList.add('fade-in');
 }
 
 function setTypes(types) {
